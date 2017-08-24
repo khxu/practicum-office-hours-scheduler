@@ -218,7 +218,7 @@ export default class EventsList extends Component {
       <tr key={event}>
         <td>{event}</td>
         <td>{this.state.type[index]}</td>
-        <td>{this.state.locations[index]}</td>
+        <td><b>{this.state.locations[index]}</b></td>
         <td>Students:
           <ul>
             <li>{this.state.studentSignups11[index] ? this.sameEmail(userEmail, this.state.studentSignups11[index], {event: event, timeslot: "1:00-2:00PM", student: "student1"}) : 
