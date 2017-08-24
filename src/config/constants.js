@@ -1,10 +1,13 @@
 import firebase from 'firebase'
 
 const config = {
-  apiKey: "AIzaSyDHL6JFTyBcaV60WpE4yXfeO0aZbzA9Xbk",
-  authDomain: "practice-auth.firebaseapp.com",
-  databaseURL: "https://practice-auth.firebaseio.com",
-}
+    apiKey: "AIzaSyD2XvY7c04ZLJzE-kpOQLB4KLWZVr9D5ck",
+    authDomain: "practicum-office-hours.firebaseapp.com",
+    databaseURL: "https://practicum-office-hours.firebaseio.com",
+    projectId: "practicum-office-hours",
+    storageBucket: "practicum-office-hours.appspot.com",
+    messagingSenderId: "634188879040"
+};
 
 firebase.initializeApp(config)
 

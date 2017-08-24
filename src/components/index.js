@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
-import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import { Route, BrowserRouter, Link, Redirect, Switch, withRouter } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Dashboard from './protected/Dashboard'
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
+import Scheduler from './protected/Scheduler'
+
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap';
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -25,7 +29,7 @@ function PublicRoute ({component: Component, authed, ...rest}) {
       {...rest}
       render={(props) => authed === false
         ? <Component {...props} />
-        : <Redirect to='/dashboard' />}
+        : <Redirect to='/scheduler' />}
     />
   )
 }
@@ -56,35 +60,33 @@ export default class App extends Component {
   render() {
     return this.state.loading === true ? <h1>Loading</h1> : (
       <BrowserRouter>
-        <div>
-          <nav className="navbar navbar-default navbar-static-top">
-            <div className="container">
-              <div className="navbar-header">
-                <Link to="/" className="navbar-brand">React Router + Firebase Auth</Link>
-              </div>
-              <ul className="nav navbar-nav pull-right">
-                <li>
-                  <Link to="/" className="navbar-brand">Home</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
-                </li>
-                <li>
-                  {this.state.authed
-                    ? <button
-                        style={{border: 'none', background: 'transparent'}}
-                        onClick={() => {
+          <div>
+              <Navbar inverse collapseOnSelect>
+                <Navbar.Header>
+                  <Navbar.Brand>
+                    <a href="/">Legal Office Hours Scheduler</a>
+                  </Navbar.Brand>
+                  <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                  <Nav pullRight>
+                    <LinkContainer to="/scheduler">
+                      <NavItem eventKey={1} href="/scheduler">Scheduler</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/register">
+                      <NavItem eventKey={2}>Register</NavItem>
+                    </LinkContainer>
+                    {this.state.authed
+                    ? <LinkContainer to="/" onClick={() => {
                           logout()
-                        }}
-                        className="navbar-brand">Logout</button>
-                    : <span>
-                        <Link to="/login" className="navbar-brand">Login</Link>
-                        <Link to="/register" className="navbar-brand">Register</Link>
-                      </span>}
-                </li>
-              </ul>
-            </div>
-          </nav>
+                        }}><NavItem eventKey={3}>Logout</NavItem></LinkContainer>
+                    : <LinkContainer to="/login"><NavItem eventKey={3}>Login</NavItem></LinkContainer>
+                    }
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
+            {/* </div> */}
+          {/* </nav> */}
           <div className="container">
             <div className="row">
               <Switch>
@@ -92,11 +94,12 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
+                <PrivateRoute authed={this.state.authed} path='/scheduler' component={Scheduler} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>
           </div>
-        </div>
+        </div>  
       </BrowserRouter>
     );
   }
