@@ -17,7 +17,7 @@ export default class EventsList extends Component {
       studentSignups32: [],
       studentSignups41: [],
       studentSignups42: [],
-      clients: [],
+      clients1: [],
       type: []
     }
 
@@ -93,12 +93,14 @@ export default class EventsList extends Component {
     let studentSignups41 = [];
     let studentSignups42 = [];
     let type = [];
+    let clients1 = [];
 
-    const today = new Date()
+    const today = new Date();
+    const dayAfterTomorrow = new Date(today.getTime() + (48*60*60*1000));
 
     for (let event in dataPayload) {
       const eventDate = new Date(event);
-      if (eventDate < today) {
+      if (eventDate < dayAfterTomorrow || dataPayload[event].holiday === true) {
         continue;
       }
       const formattedDate = (eventDate.getMonth() + 1).toString() + "/" + eventDate.getDate() + "/" + eventDate.getFullYear();
@@ -113,8 +115,9 @@ export default class EventsList extends Component {
       studentSignups41.push(dataPayload[event].timeslots['4:00-5:00PM'].student1);
       studentSignups42.push(dataPayload[event].timeslots['4:00-5:00PM'].student2);
       type.push(dataPayload[event].type);
+      clients1.push(dataPayload[event].timeslots['1:00-2:00PM'].client)
     }
-    // console.log('events', events)
+    // console.log('clients', clients)
     this.setState({
       events: events,
       type: type,
