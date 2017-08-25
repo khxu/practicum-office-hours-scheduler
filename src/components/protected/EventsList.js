@@ -18,6 +18,9 @@ export default class EventsList extends Component {
       studentSignups41: [],
       studentSignups42: [],
       clients1: [],
+      clients2: [],
+      clients3: [],
+      clients4: [],
       type: []
     }
 
@@ -26,6 +29,7 @@ export default class EventsList extends Component {
     this.handleSignup = this.handleSignup.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.sameEmail = this.sameEmail.bind(this);
+    this.logItem = this.logItem.bind(this);
   }
 
   componentDidMount () {
@@ -94,6 +98,9 @@ export default class EventsList extends Component {
     let studentSignups42 = [];
     let type = [];
     let clients1 = [];
+    let clients2 = [];
+    let clients3 = [];
+    let clients4 = [];
 
     const today = new Date();
     const dayAfterTomorrow = new Date(today.getTime() + (48*60*60*1000));
@@ -115,7 +122,10 @@ export default class EventsList extends Component {
       studentSignups41.push(dataPayload[event].timeslots['4:00-5:00PM'].student1);
       studentSignups42.push(dataPayload[event].timeslots['4:00-5:00PM'].student2);
       type.push(dataPayload[event].type);
-      clients1.push(dataPayload[event].timeslots['1:00-2:00PM'].client)
+      clients1.push(dataPayload[event].timeslots['1:00-2:00PM'].client);
+      clients2.push(dataPayload[event].timeslots['2:00-3:00PM'].client);
+      clients3.push(dataPayload[event].timeslots['3:00-4:00PM'].client);
+      clients4.push(dataPayload[event].timeslots['4:00-5:00PM'].client);
     }
     // console.log('clients', clients)
     this.setState({
@@ -129,7 +139,11 @@ export default class EventsList extends Component {
       studentSignups31: studentSignups31,
       studentSignups32: studentSignups32,
       studentSignups41: studentSignups41,
-      studentSignups42: studentSignups42
+      studentSignups42: studentSignups42,
+      clients1: clients1,
+      clients2: clients2,
+      clients3: clients3,
+      clients4: clients4
     })
   }
 
@@ -205,6 +219,10 @@ export default class EventsList extends Component {
     }
   }
 
+  logItem (item) {
+    console.log(item);
+  }
+
   render () {
     let user = firebase.auth().currentUser;
     let userEmail;
@@ -212,6 +230,14 @@ export default class EventsList extends Component {
       user.providerData.forEach(function (profile) {
         userEmail = profile.email;
       });
+    }
+
+    const clientRsvpStyle = {
+      color: 'green'
+    }
+
+    const clientNoRsvpStyle = {
+      color: 'red'
     }
 
     const listEvents = this.state.events.map((event, index)=>
@@ -225,12 +251,20 @@ export default class EventsList extends Component {
               <Button data-event={event} data-timeslot={"1:00-2:00PM"} data-student={"student1"} bsStyle="primary" bsSize="xsmall" onClick={this.handleSignup}>Sign Me Up!</Button>}</li>
             <li>{this.state.studentSignups12[index] ? this.sameEmail(userEmail, this.state.studentSignups12[index], {event: event, timeslot: "1:00-2:00PM", student: "student2"}) :<Button bsStyle="primary" bsSize="xsmall" data-event={event} data-timeslot={"1:00-2:00PM"} data-student={"student2"} onClick={this.handleSignup}>Sign Me Up!</Button>}</li>
           </ul>
+          Client:
+          <ul>
+            {this.state.clients1[index] ? <li style={clientRsvpStyle}>Client has RSVP'd</li> : <li style={clientNoRsvpStyle}>No Client RSVP Yet</li>}
+          </ul>
         </td>
         <td>Students:
           <ul>
             <li>{this.state.studentSignups21[index] ? this.sameEmail(userEmail, this.state.studentSignups21[index], {event: event, timeslot: "2:00-3:00PM", student: "student1"}) : 
             <Button data-event={event} data-timeslot={"2:00-3:00PM"} data-student={"student1"} bsStyle="primary" bsSize="xsmall" onClick={this.handleSignup}>Sign Me Up!</Button>}</li>
           <li>{this.state.studentSignups22[index] ? this.sameEmail(userEmail, this.state.studentSignups22[index], {event: event, timeslot: "2:00-3:00PM", student: "student2"}) :<Button bsStyle="primary" bsSize="xsmall" data-event={event} data-timeslot={"2:00-3:00PM"} data-student={"student2"} onClick={this.handleSignup}>Sign Me Up!</Button>}</li>
+          </ul>
+          Client:
+          <ul>
+            {this.state.clients2[index] ? <li style={clientRsvpStyle}>Client has RSVP'd</li> : <li style={clientNoRsvpStyle}>No Client RSVP Yet</li>}
           </ul>
         </td>
         <td>Students:
@@ -239,12 +273,20 @@ export default class EventsList extends Component {
             <Button data-event={event} data-timeslot={"3:00-4:00PM"} data-student={"student1"} bsStyle="primary" bsSize="xsmall" onClick={this.handleSignup}>Sign Me Up!</Button>}</li>
           <li>{this.state.studentSignups32[index] ? this.sameEmail(userEmail, this.state.studentSignups32[index], {event: event, timeslot: "3:00-4:00PM", student: "student2"}) :<Button bsStyle="primary" bsSize="xsmall" data-event={event} data-timeslot={"3:00-4:00PM"} data-student={"student2"} onClick={this.handleSignup}>Sign Me Up!</Button>}</li>
           </ul>
+          Client:
+          <ul>
+            {this.state.clients3[index] ? <li style={clientRsvpStyle}>Client has RSVP'd</li> : <li style={clientNoRsvpStyle}>No Client RSVP Yet</li>}
+          </ul>
         </td>
         <td>Students:
           <ul>
             <li>{this.state.studentSignups41[index] ? this.sameEmail(userEmail, this.state.studentSignups41[index], {event: event, timeslot: "4:00-5:00PM", student: "student1"}) : 
             <Button data-event={event} data-timeslot={"4:00-5:00PM"} data-student={"student1"} bsStyle="primary" bsSize="xsmall" onClick={this.handleSignup}>Sign Me Up!</Button>}</li>
           <li>{this.state.studentSignups42[index] ? this.sameEmail(userEmail, this.state.studentSignups42[index], {event: event, timeslot: "4:00-5:00PM", student: "student2"}) :<Button bsStyle="primary" bsSize="xsmall" data-event={event} data-timeslot={"4:00-5:00PM"} data-student={"student2"} onClick={this.handleSignup}>Sign Me Up!</Button>}</li>
+          </ul>
+          Client:
+          <ul>
+            {this.state.clients4[index] ? <li style={clientRsvpStyle}>Client has RSVP'd</li> : <li style={clientNoRsvpStyle}>No Client RSVP Yet</li>}
           </ul>
         </td>
       </tr>

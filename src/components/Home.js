@@ -12,7 +12,7 @@ export default class Home extends Component {
         <h3>Guidelines</h3>
         <p>First, THANK YOU for taking the time to help provide this important service to East Bay and Central Valley entrepreneurs of limited means. These office hours play a vital role within the framework of services we offer at the Practicum by assisting clients with limited service tasks, such as delivering template documents and providing initial answers to legal questions. Our goal is to give you opportunities to take the lead in both diagnosing and responding to entrepreneur legal needs, always with solid backup from a supervising attorney. Please read on to learn more about client questions that will likely come up, how office hours are structured, the dress code, and expectations for students.</p>
         <h4>Clients’ Needs</h4>
-        <p>While clients are not pre-screened, clients in previous sessions frequently ask about the following topics:
+        <p>While clients are not pre-screened, clients in previous sessions have frequently asked about the following topics:
           <ul>
             <li>Entity formation (both nonprofit and for-profit);</li>
             <li>Investment instruments (convertible notes, SAFE/KISS agreements);</li>
