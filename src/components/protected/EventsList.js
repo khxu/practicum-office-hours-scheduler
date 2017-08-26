@@ -61,7 +61,7 @@ export default class EventsList extends Component {
 
     for (let event in dataPayload) {
       const eventDate = new Date(event);
-      if (eventDate < dayAfterTomorrow || dataPayload[event].holiday === true) {
+      if (dataPayload[event].holiday === true) {
         continue;
       }
       const formattedDate = (eventDate.getMonth() + 1).toString() + "/" + eventDate.getDate() + "/" + eventDate.getFullYear();
