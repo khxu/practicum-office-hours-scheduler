@@ -8,6 +8,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "firebase": "^3.6.1",
+    "firebase-functions": "^0.6.2",
     "react": "^15.4.0",
     "react-bootstrap": "^0.31.2",
     "react-dom": "^15.4.0",

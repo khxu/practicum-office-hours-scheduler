@@ -35,52 +35,6 @@ export default class EventsList extends Component {
   componentDidMount () {
     const eventsRef = firebase.database().ref('events')
       .on('value', (snapshot) => this.updateTable(snapshot))
-      // .once('value')
-      // .then(data => {
-      //   const dataPayload = data.val();
-      //   // console.log(dataPayload);
-      //   let events = [];
-      //   let locations = [];
-      //   let studentSignups11 = [];
-      //   let studentSignups12 = [];
-      //   let studentSignups21 = [];
-      //   let studentSignups22 = [];
-      //   let studentSignups31 = [];
-      //   let studentSignups32 = [];
-      //   let studentSignups41 = [];
-      //   let studentSignups42 = [];
-      //   let type = [];
-
-      //   for (let event in dataPayload) {
-      //     const eventDate = new Date(event)
-      //     const formattedDate = (eventDate.getMonth() + 1).toString() + "/" + eventDate.getDate() + "/" + eventDate.getFullYear();
-      //     events.push(formattedDate);
-      //     locations.push(dataPayload[event].location);
-      //     studentSignups11.push(dataPayload[event].timeslots['1:00-2:00PM'].student1);
-      //     studentSignups12.push(dataPayload[event].timeslots['1:00-2:00PM'].student2);
-      //     studentSignups21.push(dataPayload[event].timeslots['2:00-3:00PM'].student1);
-      //     studentSignups22.push(dataPayload[event].timeslots['2:00-3:00PM'].student2);
-      //     studentSignups31.push(dataPayload[event].timeslots['3:00-4:00PM'].student1);
-      //     studentSignups32.push(dataPayload[event].timeslots['3:00-4:00PM'].student2);
-      //     studentSignups41.push(dataPayload[event].timeslots['4:00-5:00PM'].student1);
-      //     studentSignups42.push(dataPayload[event].timeslots['4:00-5:00PM'].student2);
-      //     type.push(dataPayload[event].type);
-      //   }
-      //   // console.log('events', events)
-      //   this.setState({
-      //     events: events,
-      //     type: type,
-      //     locations: locations,
-      //     studentSignups11: studentSignups11,
-      //     studentSignups12: studentSignups12,
-      //     studentSignups21: studentSignups21,
-      //     studentSignups22: studentSignups22,
-      //     studentSignups31: studentSignups31,
-      //     studentSignups32: studentSignups32,
-      //     studentSignups41: studentSignups41,
-      //     studentSignups42: studentSignups42
-      //   })
-      // })
   }
 
   updateTable (data) {
