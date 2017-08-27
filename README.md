@@ -1,14 +1,13 @@
-# Auth with React Router V4 and Firebase V3
-This is an example repo for authenticating with Firebase and React Router.
-
-*Using React 15.4.0, React Router 4, and Firebase 3.6.1*
+# New Business Practicum Legal Office Hours Scheduler
+This web app allows students to sign up for office hours timeslots. Office hours are synced with an Eventbrite account.
 
 #### Features:
 * Protected Routes with React Router
 * Register new users with Firebase
 * Add new users to ```/users``` in your Firebase database
 * Login/Logout Functionality
-* Simple Boostrap UI
+* Simple Bootstrap UI
+* Firebase Cloud Functions sync Eventbrite data
 
 #### Instructions:
 * Swap out the firebase config in ```config/constants``` with your own
