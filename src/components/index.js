@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
-import { Route, BrowserRouter, Link, Redirect, Switch, withRouter } from 'react-router-dom'
+import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
@@ -9,7 +9,7 @@ import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import Scheduler from './protected/Scheduler'
 
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
+import { Nav, Navbar, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
