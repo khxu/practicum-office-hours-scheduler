@@ -57,11 +57,14 @@ export default class EventsList extends Component {
     let clients4 = [];
 
     const today = new Date();
-    const dayAfterTomorrow = new Date(today.getTime() + (48*60*60*1000));
+    const dayBeforeYesterday = new Date(today.getTime() - (48*60*60*1000));
+    console.log("today", today);
+    console.log("dayBeforeYesterday", dayBeforeYesterday);
 
     for (let event in dataPayload) {
       const eventDate = new Date(event);
-      if (dataPayload[event].holiday === true) {
+      console.log(eventDate < dayBeforeYesterday);
+      if (eventDate < dayBeforeYesterday || dataPayload[event].holiday === true) {
         continue;
       }
       const formattedDate = (eventDate.getMonth() + 1).toString() + "/" + eventDate.getDate() + "/" + eventDate.getFullYear();
