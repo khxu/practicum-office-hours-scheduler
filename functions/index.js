@@ -12,12 +12,40 @@ exports.recordEventbriteOrderPayload = functions.https.onRequest((req, res) => {
   let claimedTimeslots;
   let timeslotPath;
   for (let event in eventbriteOrderPayload) {
-    if (JSON.parse(eventbriteOrderPayload[event]).length > 0) {
-      console.log('event', event);
-      claimedTimeslots = JSON.parse(eventbriteOrderPayload[event]);
-      console.log('timeslots', Array.isArray(claimedTimeslots));
-      claimedTimeslots.forEach(function(timeslot){
-        switch (timeslot) {
+    let eventSlots = {
+      '1:00-1:40pm Timeslot': false,
+      '2:00-2:40pm Timeslot': false,
+      '3:00-3:40pm Timeslot': false,
+      '4:00-4:40pm Timeslot': false
+    }
+
+    claimedTimeslots = JSON.parse(eventbriteOrderPayload[event]);
+    claimedTimeslots.forEach(function(timeslot){
+      switch (timeslot) {
+        case "1:00-1:40pm Timeslot":
+          timeslotPath = '1:00-2:00PM';
+          eventSlots["1:00-1:40pm Timeslot"] = true;
+          break;
+        case "2:00-2:40pm Timeslot":
+          timeslotPath = '2:00-3:00PM';
+          eventSlots["2:00-2:40pm Timeslot"] = true;
+          break;
+        case "3:00-3:40pm Timeslot":
+          timeslotPath = '3:00-4:00PM';
+          eventSlots["3:00-3:40pm Timeslot"] = true;
+          break;
+        case "4:00-4:40pm Timeslot":
+          timeslotPath = '4:00-5:00PM';
+          eventSlots["4:00-4:40pm Timeslot"] = true;
+          break;
+      }
+      timeslotClientRef = admin.database().ref('events/' + event + '/timeslots/' + timeslotPath + '/client');
+      timeslotClientRef.set(true);
+    })
+
+    for (var eventSlot in eventSlots) {
+      if (eventSlots[eventSlot] === false) {
+        switch (eventSlot) {
           case "1:00-1:40pm Timeslot":
             timeslotPath = '1:00-2:00PM';
             break;
@@ -32,8 +60,8 @@ exports.recordEventbriteOrderPayload = functions.https.onRequest((req, res) => {
             break;
         }
         timeslotClientRef = admin.database().ref('events/' + event + '/timeslots/' + timeslotPath + '/client');
-        timeslotClientRef.set(true);
-      })
+        timeslotClientRef.set(false);
+      }
     }
   }
   res.end();
