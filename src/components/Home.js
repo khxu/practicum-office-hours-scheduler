@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import { Image } from 'react-bootstrap'
+import Logo from '../img/NBPracticumLogo2017.png'
+import './Home.css'
 
 export default class Home extends Component {
   render () {
     return (
       <div>
+        <div className='logo-container'>
+          <img className='logo' src={Logo} alt='practicum-logo'/>
+        </div>
         <h2>Welcome to the New Business Practicum's Office Hours Scheduler!</h2>
         <h3>Signing Up and Troubleshooting</h3>
         <p>If you're looking to help out at office hours, please feel free to create an account by clicking "Register" on the navigation bar at the top of this screen. After logging in, click "Scheduler" to sign up for open timeslots, or cancel a session you signed up for previously.</p>
