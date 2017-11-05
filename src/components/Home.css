@@ -1,0 +1,9 @@
+.logo {
+  width: 200px;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
