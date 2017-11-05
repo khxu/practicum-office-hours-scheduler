@@ -33,7 +33,7 @@ export default class EventsList extends Component {
   }
 
   componentDidMount () {
-    const eventsRef = firebase.database().ref('events')
+    firebase.database().ref('events')
       .on('value', (snapshot) => this.updateTable(snapshot))
   }
 
@@ -58,12 +58,12 @@ export default class EventsList extends Component {
 
     const today = new Date();
     const dayBeforeYesterday = new Date(today.getTime() - (48*60*60*1000));
-    console.log("today", today);
-    console.log("dayBeforeYesterday", dayBeforeYesterday);
+    // console.log("today", today);
+    // console.log("dayBeforeYesterday", dayBeforeYesterday);
 
     for (let event in dataPayload) {
       const eventDate = new Date(event);
-      console.log(eventDate < dayBeforeYesterday);
+      // console.log(eventDate < dayBeforeYesterday);
       if (eventDate < dayBeforeYesterday || dataPayload[event].holiday === true) {
         continue;
       }
@@ -110,12 +110,12 @@ export default class EventsList extends Component {
       // console.log('data-event', e.target.getAttribute('data-event'))
       const event = e.target.getAttribute('data-event')
       const eventDate = new Date(event)
-      const eventMonth = (eventDate.getMonth() + 1).toString();
+      let eventMonth = (eventDate.getMonth() + 1).toString();
       if (eventMonth.length < 2){
         eventMonth = '0' + eventMonth;
       }
       // console.log('eventMonth', eventMonth)
-      const paddedDate = eventDate.getDate().toString();
+      let paddedDate = eventDate.getDate().toString();
       if (paddedDate.length < 2){
         paddedDate = '0' + paddedDate;
       }
@@ -145,12 +145,12 @@ export default class EventsList extends Component {
       // console.log('data-event', e.target.getAttribute('data-event'))
       const event = e.target.getAttribute('data-event')
       const eventDate = new Date(event)
-      const eventMonth = (eventDate.getMonth() + 1).toString();
+      let eventMonth = (eventDate.getMonth() + 1).toString();
       if (eventMonth.length < 2){
         eventMonth = '0' + eventMonth;
       }
       // console.log('eventMonth', eventMonth)
-      const paddedDate = eventDate.getDate().toString();
+      let paddedDate = eventDate.getDate().toString();
       if (paddedDate.length < 2){
         paddedDate = '0' + paddedDate;
       }
@@ -177,7 +177,7 @@ export default class EventsList extends Component {
   }
 
   logItem (item) {
-    console.log(item);
+    // console.log(item);
   }
 
   render () {
