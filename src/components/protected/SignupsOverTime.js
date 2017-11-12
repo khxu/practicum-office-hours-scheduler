@@ -112,7 +112,7 @@ export default class SignupsOverTime extends Component {
         .attr("font-size", 10)
         .attr("text-anchor", "end")
       .selectAll("g")
-      .data(keys.map(key => key.slice(0, 1).toUpperCase() + key.slice(1)).slice().reverse())
+      .data(keys.map(key => key.slice(0, 1).toUpperCase() + key.slice(1)))
       .enter().append("g")
         .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
